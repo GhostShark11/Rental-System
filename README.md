@@ -1,4 +1,7 @@
 # Lensa Rental - Photography Gear Rental System (Java CLI)
+
+![Class Diagram](ClassDiagram.png)
+
 ## Description
 A command line rental system written in Java for the final project (UAS) of
 *Praktikum Pemrograman Berorientasi Objek (PBO) - Class B*.
