@@ -9,12 +9,10 @@ public class TransferBank implements Pembayaran {
     public TransferBank() {
         // nothing to initialise
     }
-
     @Override
     public String getNama() {
         return "Bank Transfer";
     }
-
     @Override
     public void prosesPembayaran(double jumlah) {
         System.out.println("  [Payment] Bank transfer of " + Util.rupiah(jumlah)
