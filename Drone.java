@@ -4,10 +4,8 @@
 public class Drone extends Barang {
     /** Operator fee per rental day. */
     public static final double BIAYA_OPERATOR = 100_000;
-
     /**
      * Creates a drone.
-     *
      * @param id          unique code
      * @param nama        name
      * @param tarifHarian daily rate
@@ -17,18 +15,15 @@ public class Drone extends Barang {
             throws InputTidakValidException {
         super(id, nama, tarifHarian);
     }
-
     @Override
     public double hitungBiaya(int hari) {
         periksaHari(hari);
         return (getTarifHarian() + BIAYA_OPERATOR) * hari;
     }
-
     @Override
     public String getKategori() {
         return "Drone";
     }
-
     @Override
     public String getKeteranganBiaya() {
         return "daily rate + operator fee " + Util.rupiah(BIAYA_OPERATOR) + "/day";
