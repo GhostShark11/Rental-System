@@ -26,12 +26,11 @@ public class Main {
     public Main() {
         // fields are initialised above
     }
-
     /**
      * Program start.
-     *
      * @param args command-line arguments (not used)
      */
+    
     public static void main(String[] args) {
         Main aplikasi = new Main();
         aplikasi.siapkanData();
@@ -97,15 +96,14 @@ public class Main {
             System.out.println("  [!] " + e.getMessage());
         }
     }
-
     /**
      * Checks the login data.
-     *
      * @param username typed username
      * @param password typed password
      * @return the matching account
      * @throws LoginGagalException if the username or password is wrong
      */
+    
     private Akun autentikasi(String username, String password) throws LoginGagalException {
         Akun akun = daftarAkun.get(username);
         if (akun == null || !akun.login(username, password)) {
