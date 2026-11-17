@@ -13,10 +13,8 @@ public class Invoice {
 
     /** Late fee (0 if the items are not returned late). */
     private final double denda;
-
     /**
      * Creates an invoice for a transaction.
-     *
      * @param transaksi the transaction
      */
     public Invoice(Transaksi transaksi) {
