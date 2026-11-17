@@ -43,16 +43,15 @@ public class Transaksi {
 
     /** Current status. */
     private StatusTransaksi status = StatusTransaksi.MENUNGGU;
-
     /**
      * Creates a transaction with status "waiting".
-     *
      * @param penyewa    the renter
      * @param daftar     the items to rent (at least one)
      * @param lamaSewa   rental duration in days (greater than 0)
      * @param pembayaran chosen payment method
      * @throws InputTidakValidException if there is no item or the duration is invalid
      */
+    
     public Transaksi(Penyewa penyewa, List<Barang> daftar, int lamaSewa,
                      Pembayaran pembayaran) throws InputTidakValidException {
         if (daftar.isEmpty()) {
@@ -76,112 +75,100 @@ public class Transaksi {
         this.tanggalSewa = LocalDate.now();
         this.tanggalJatuhTempo = tanggalSewa.plusDays(lamaSewa);
     }
-
     /**
      * Gets the value: the transaction code.
-     *
      * @return the transaction code
      */
+    
     public String getId() {
         return id;
     }
-
     /**
      * Gets the value: the renter.
-     *
      * @return the renter
      */
+    
     public Penyewa getPenyewa() {
         return penyewa;
     }
-
     /**
      * Gets the value: a copy of the list of items.
-     *
      * @return a copy of the list of items
      */
+    
     public List<Barang> getBarang() {
         return new ArrayList<>(barang);
     }
-
     /**
      * Gives the cost of one item.
-     *
      * @param indeks position of the item in the transaction
      * @return its cost for the whole rental duration
      */
+    
     public double getBiayaItem(int indeks) {
         return biayaItem.get(indeks);
     }
-
     /**
      * Gets the value: the number of rental days.
-     *
      * @return the number of rental days
      */
+    
     public int getLamaSewa() {
         return lamaSewa;
     }
-
     /**
      * Gets the value: the payment method.
-     *
      * @return the payment method
      */
+    
     public Pembayaran getPembayaran() {
         return pembayaran;
     }
-
     /**
      * Gets the value: the start date of the rental.
-     *
      * @return the start date of the rental
      */
+    
     public LocalDate getTanggalSewa() {
         return tanggalSewa;
     }
-
     /**
      * Gets the value: the date the items must be returned.
-     *
      * @return the date the items must be returned
      */
+    
     public LocalDate getTanggalJatuhTempo() {
         return tanggalJatuhTempo;
     }
-
     /**
      * Gets the value: the real return date, or null if not returned yet.
-     *
      * @return the real return date, or null if not returned yet
      */
+    
     public LocalDate getTanggalKembali() {
         return tanggalKembali;
     }
-
     /**
      * Gets the value: the current status.
-     *
      * @return the current status
      */
+    
     public StatusTransaksi getStatus() {
         return status;
     }
-
     /**
      * Changes the status.
-     *
      * @param status the new status
      */
+    
     public void ubahStatus(StatusTransaksi status) {
         this.status = status;
     }
-
     /**
      * Gets the value: the total rental cost of all items (without late fee).
-     *
      * @return the total rental cost of all items (without late fee)
      */
+    
     public double hitungTotal() {
         double total = 0;
         for (double biaya : biayaItem) {
@@ -189,44 +176,40 @@ public class Transaksi {
         }
         return total;
     }
-
     /**
      * Gets the value: the number of days the return was late (0 if on time or not returned).
-     *
      * @return the number of days the return was late (0 if on time or not returned)
      */
+    
     public long hitungHariTerlambat() {
         if (tanggalKembali == null) {
             return 0;
         }
         return Math.max(0, ChronoUnit.DAYS.between(tanggalJatuhTempo, tanggalKembali));
     }
-
     /**
      * Gets the value: the late fee = late days x late fee per day.
-     *
      * @return the late fee = late days x late fee per day
      */
+    
     public double hitungDenda() {
         return hitungHariTerlambat() * dendaPerHari;
     }
-
     /**
      * Starts the rental: sets the start date and the due date.
-     *
      * @param mulai the start date
      */
+    
     public void mulaiSewa(LocalDate mulai) {
         this.tanggalSewa = mulai;
         this.tanggalJatuhTempo = mulai.plusDays(lamaSewa);
     }
-
     /**
      * Records the return date.
-     *
      * @param kembali the date the items came back
      * @throws InputTidakValidException if the date is before the rental start
      */
+    
     public void catatPengembalian(LocalDate kembali) throws InputTidakValidException {
         if (kembali.isBefore(tanggalSewa)) {
             throw new InputTidakValidException("Return date cannot be before the rental date ("
@@ -234,12 +217,11 @@ public class Transaksi {
         }
         this.tanggalKembali = kembali;
     }
-
     /**
      * Gets the value: the item codes separated by commas, e.g. "K01,D01".
-     *
      * @return the item codes separated by commas, e.g. "K01,D01"
      */
+    
     public String ringkasBarang() {
         StringBuilder sb = new StringBuilder();
         for (Barang b : barang) {
