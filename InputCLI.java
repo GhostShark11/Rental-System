@@ -9,22 +9,20 @@ import java.util.Scanner;
 public class InputCLI {
     /** Scanner that reads from the keyboard. */
     private final Scanner scanner;
-
     /**
      * Creates an input reader.
-     *
      * @param scanner scanner connected to the keyboard
      */
+    
     public InputCLI(Scanner scanner) {
         this.scanner = scanner;
     }
-
     /**
      * Reads one trimmed line. If the input has ended the program stops cleanly.
-     *
      * @param prompt text shown before reading
      * @return the typed text (may be empty)
      */
+    
     public String bacaTeks(String prompt) {
         System.out.print(prompt);
         if (!scanner.hasNextLine()) {
@@ -34,15 +32,14 @@ public class InputCLI {
         }
         return scanner.nextLine().trim();
     }
-
     /**
      * Reads a whole number inside a range.
-     *
      * @param prompt text shown before reading
      * @param min    lowest accepted value
      * @param max    highest accepted value
      * @return the validated number
      */
+    
     public int bacaInt(String prompt, int min, int max) {
         while (true) {
             try {
@@ -56,13 +53,12 @@ public class InputCLI {
             System.out.println("  [!] Enter a number between " + min + " and " + max + ".");
         }
     }
-
     /**
      * Reads a money amount (separators "," and "." are ignored).
-     *
      * @param prompt text shown before reading
      * @return the amount, always greater than 0
      */
+    
     public double bacaUang(String prompt) {
         while (true) {
             try {
@@ -77,13 +73,12 @@ public class InputCLI {
             System.out.println("  [!] Enter a valid amount greater than 0.");
         }
     }
-
     /**
      * Reads a date (dd-MM-yyyy). Pressing Enter returns today.
-     *
      * @param prompt text shown before reading
      * @return the entered date, or today's date if the answer is empty
      */
+    
     public LocalDate bacaTanggal(String prompt) {
         while (true) {
             String teks = bacaTeks(prompt);
@@ -97,13 +92,12 @@ public class InputCLI {
             }
         }
     }
-
     /**
      * Asks a yes/no question.
-     *
      * @param prompt question text (without the "(y/n)" part)
      * @return true for "y", false for "n"
      */
+    
     public boolean konfirmasi(String prompt) {
         while (true) {
             String jawab = bacaTeks(prompt + " (y/n): ");
@@ -116,13 +110,12 @@ public class InputCLI {
             System.out.println("  [!] Answer with y or n.");
         }
     }
-
     /**
      * Reads an optional money amount. Pressing Enter keeps the old value.
-     *
      * @param prompt text shown before reading
      * @return the amount, or {@code null} if the answer is empty
      */
+    
     public Double bacaUangOpsional(String prompt) {
         while (true) {
             String teks = bacaTeks(prompt);
