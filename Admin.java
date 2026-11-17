@@ -5,6 +5,7 @@ import java.util.List;
  * Admin account: manages the items, accepts or rejects transactions and
  * confirms returns (with late fee calculation).
  */
+
 public class Admin extends Akun {   // inheritance
     /** Items of the shop. */
     private final DaftarBarang daftarBarang;
@@ -14,13 +15,13 @@ public class Admin extends Akun {   // inheritance
 
     /**
      * Creates an admin account.
-     *
      * @param id              account id
      * @param username        login name
      * @param password        login password
      * @param daftarBarang    items of the shop
      * @param daftarTransaksi transactions of the shop
      */
+    
     public Admin(String id, String username, String password,
                  DaftarBarang daftarBarang, DaftarTransaksi daftarTransaksi) {
         super(id, username, password);
@@ -37,10 +38,10 @@ public class Admin extends Akun {   // inheritance
      * Accepts a waiting transaction: the items become rented, the payment is
      * processed, the invoice is printed and the transaction goes to the
      * renter's history. Nothing changes if an item is no longer available.
-     *
      * @param t the transaction to accept
      * @throws RentalException if the transaction is not waiting or an item is not available
      */
+    
     public void terimaTransaksi(Transaksi t) throws RentalException {
         if (t.getStatus() != StatusTransaksi.MENUNGGU) {
             throw new TransaksiException("Only waiting transactions can be accepted.");
@@ -67,10 +68,10 @@ public class Admin extends Akun {   // inheritance
 
     /**
      * Rejects a waiting transaction.
-     *
      * @param t the transaction to reject
      * @throws TransaksiException if the transaction is not waiting
      */
+    
     public void tolakTransaksi(Transaksi t) throws TransaksiException {
         if (t.getStatus() != StatusTransaksi.MENUNGGU) {
             throw new TransaksiException("Only waiting transactions can be rejected.");
@@ -81,11 +82,11 @@ public class Admin extends Akun {   // inheritance
     /**
      * Confirms that the items were returned, calculates the late fee (per day
      * of delay), makes the items available again and prints the final invoice.
-     *
      * @param t       the rented transaction
      * @param kembali the date the items came back
      * @throws RentalException if the transaction is not being rented or the date is invalid
      */
+    
     public void konfirmasiKembali(Transaksi t, LocalDate kembali) throws RentalException {
         if (t.getStatus() != StatusTransaksi.DISEWA) {
             throw new TransaksiException("Only transactions that are being rented can be returned.");
@@ -108,9 +109,9 @@ public class Admin extends Akun {   // inheritance
 
     /**
      * Item management screen: list, add, edit and delete items.
-     *
      * @param in keyboard input reader
      */
+    
     public void kelolaBarang(InputCLI in) {
         boolean aktif = true;
         while (aktif) {
@@ -133,9 +134,9 @@ public class Admin extends Akun {   // inheritance
 
     /**
      * Screen: add a new item.
-     *
      * @param in keyboard input reader
      */
+    
     private void tambahBarang(InputCLI in) {
         System.out.println("  Category: 1. Camera  2. Lens  3. Drone");
         int kategori = in.bacaInt("  Choose (1-3): ", 1, 3);
@@ -159,9 +160,9 @@ public class Admin extends Akun {   // inheritance
 
     /**
      * Screen: edit an item.
-     *
      * @param in keyboard input reader
      */
+    
     private void editBarang(InputCLI in) {
         DaftarBarang.tampilkan(daftarBarang.getSemua());
         String id = in.bacaTeks("  Item code to edit (Enter to cancel): ");
@@ -182,9 +183,9 @@ public class Admin extends Akun {   // inheritance
 
     /**
      * Screen: delete an item.
-     *
      * @param in keyboard input reader
      */
+    
     private void hapusBarang(InputCLI in) {
         DaftarBarang.tampilkan(daftarBarang.getSemua());
         String id = in.bacaTeks("  Item code to delete (Enter to cancel): ");
@@ -204,9 +205,9 @@ public class Admin extends Akun {   // inheritance
 
     /**
      * Screen: view the waiting transactions and accept or reject one.
-     *
      * @param in keyboard input reader
      */
+    
     private void menuTransaksiMasuk(InputCLI in) {
         List<Transaksi> menunggu = daftarTransaksi.getByStatus(StatusTransaksi.MENUNGGU);
         if (menunggu.isEmpty()) {
@@ -235,9 +236,9 @@ public class Admin extends Akun {   // inheritance
 
     /**
      * Screen: confirm the return of a rented transaction.
-     *
      * @param in keyboard input reader
      */
+    
     private void menuPengembalian(InputCLI in) {
         List<Transaksi> disewa = daftarTransaksi.getByStatus(StatusTransaksi.DISEWA);
         if (disewa.isEmpty()) {
