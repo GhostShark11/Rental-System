@@ -28,23 +28,21 @@ public class Penyewa extends Akun {   // inheritance
     private final Pembayaran[] metodePembayaran = {   // polymorphism: one type, many classes
         new TransferBank(), new QRIS(), new Tunai()
     };
-
     /**
      * Creates a renter account.
-     *
      * @param id              account id
      * @param username        login name
      * @param password        login password
      * @param daftarBarang    items of the shop
      * @param daftarTransaksi transactions of the shop
      */
+    
     public Penyewa(String id, String username, String password,
                    DaftarBarang daftarBarang, DaftarTransaksi daftarTransaksi) {
         super(id, username, password);
         this.daftarBarang = daftarBarang;
         this.daftarTransaksi = daftarTransaksi;
     }
-
     @Override
     public String getPeran() {
         return "Renter";
@@ -59,16 +57,15 @@ public class Penyewa extends Akun {   // inheritance
             DaftarBarang.tampilkan(tersedia);
         }
     }
-
     /**
      * Makes a transaction from the items in the rental list. The transaction
      * waits for the admin. The rental list is emptied afterwards.
-     *
      * @param lamaSewa   rental duration in days
      * @param pembayaran chosen payment method
      * @return the new transaction
      * @throws RentalException if the list is empty, the duration is wrong or an item is not available
      */
+    
     public Transaksi buatTransaksi(int lamaSewa, Pembayaran pembayaran)
             throws RentalException {
         if (keranjang.isKosong()) {
@@ -89,12 +86,11 @@ public class Penyewa extends Akun {   // inheritance
         keranjang.kosongkan();
         return t;
     }
-
     /**
      * Adds an accepted transaction to the history.
-     *
      * @param t the accepted transaction
      */
+    
     public void tambahRiwayat(Transaksi t) {
         riwayat.add(t);
     }
@@ -134,12 +130,11 @@ public class Penyewa extends Akun {   // inheritance
             }
         }
     }
-
     /**
      * Screen: add an item to the rental list.
-     *
      * @param in keyboard input reader
      */
+    
     private void menuTambah(InputCLI in) {
         lihatBarang();
         String id = in.bacaTeks("  Item code to add (Enter to cancel): ");
@@ -154,12 +149,11 @@ public class Penyewa extends Akun {   // inheritance
             System.out.println("  [!] " + e.getMessage());
         }
     }
-
     /**
      * Screen: show the rental list and optionally remove an item.
-     *
      * @param in keyboard input reader
      */
+    
     private void menuKeranjang(InputCLI in) {
         if (keranjang.isKosong()) {
             System.out.println("  Your rental list is empty.");
@@ -177,12 +171,11 @@ public class Penyewa extends Akun {   // inheritance
             System.out.println("  [!] " + e.getMessage());
         }
     }
-
     /**
      * Screen: ask duration and payment method, then create the transaction.
-     *
      * @param in keyboard input reader
      */
+    
     private void menuTransaksi(InputCLI in) {
         if (keranjang.isKosong()) {
             System.out.println("  [!] Your rental list is empty. Add items first (menu 2).");
@@ -193,7 +186,6 @@ public class Penyewa extends Akun {   // inheritance
         int hari = in.bacaInt("  Rental duration in days (" + MIN_HARI + "-" + MAX_HARI + "): ",
                 MIN_HARI, MAX_HARI);
         Pembayaran pembayaran = pilihPembayaran(in);
-
         double total = 0;
         System.out.println("  Cost estimate for " + hari + " day(s):");
         for (Barang b : daftar) {
@@ -214,13 +206,12 @@ public class Penyewa extends Akun {   // inheritance
             System.out.println("  [!] " + e.getMessage());
         }
     }
-
     /**
      * Lets the renter choose one of the payment methods.
-     *
      * @param in keyboard input reader
      * @return the chosen payment method
      */
+    
     private Pembayaran pilihPembayaran(InputCLI in) {
         System.out.println("  Payment method:");
         for (int i = 0; i < metodePembayaran.length; i++) {
@@ -230,12 +221,11 @@ public class Penyewa extends Akun {   // inheritance
                 1, metodePembayaran.length);
         return metodePembayaran[pilihan - 1];
     }
-
     /**
      * Screen: rental history, with the possibility to print an invoice.
-     *
      * @param in keyboard input reader
      */
+    
     private void menuRiwayat(InputCLI in) {
         lihatRiwayat();
         if (riwayat.isEmpty()) {
