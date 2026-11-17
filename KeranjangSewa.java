@@ -13,10 +13,8 @@ public class KeranjangSewa {
     public KeranjangSewa() {
         // starts empty
     }
-
     /**
      * Adds an available item to the list.
-     *
      * @param b the item
      * @throws BarangTidakTersediaException if the item is rented or already in the list
      */
@@ -30,10 +28,8 @@ public class KeranjangSewa {
         }
         barang.add(b);
     }
-
     /**
      * Removes an item from the list.
-     *
      * @param id code of the item
      * @throws DataTidakDitemukanException if the item is not in the list
      */
@@ -46,24 +42,19 @@ public class KeranjangSewa {
         }
         throw new DataTidakDitemukanException("Item '" + id + "' is not in your list.");
     }
-
     /** Empties the list. */
     public void kosongkan() {
         barang.clear();
     }
-
     /**
      * Gets the value: true if there is no item in the list.
-     *
      * @return true if there is no item in the list
      */
     public boolean isKosong() {
         return barang.isEmpty();
     }
-
     /**
      * Gets the value: a copy of the items in the list.
-     *
      * @return a copy of the items in the list
      */
     public List<Barang> getBarang() {
